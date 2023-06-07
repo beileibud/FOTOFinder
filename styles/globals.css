@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: rgb(166, 156, 143);
   text-decoration: none;
 }
 
@@ -18,5 +18,26 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #fffbf7;
+}
+
+/*button*/
+.appointment-form {
+  color: rgb(166, 156, 143);
+}
+
+.app-button {
+  background-color:  rgb(234, 226, 216);
+  color:rgb(131, 123, 113);
+  outline-color: wheat;
+}
+
+/*profile side nav */
+
+.sideNavBar{
+  flex-grow: 1;
+}
+
+.profile-main{
+  flex-grow: 3;
 }
