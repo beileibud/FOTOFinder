@@ -2,7 +2,7 @@ import React from 'react';
 import PhotographerCard from '../../components/PhotographerCard';
 import SideNavBar from '../../components/SideNavBar';
 
-export default function AddPhoto() {
+export default function ViewPhotographer() {
   return (
     <div style={{ display: 'flex', marginTop: '50px' }}>
       <div className="sideNavBar">
