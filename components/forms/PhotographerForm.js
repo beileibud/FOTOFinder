@@ -11,7 +11,6 @@ import { createUser, updateUser } from '../../api/userData';
 const initialState = {
   firebaseKey: '',
   image: '',
-  imageFile: null,
   name: '',
   zipcode: '',
   phone: '',
@@ -27,7 +26,7 @@ function PhotographerForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (obj.firebaseKey) setFormInput(obj);
+    if (obj && obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -38,19 +37,21 @@ function PhotographerForm({ obj }) {
     }));
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const image = URL.createObjectURL(file);
-    setFormInput((prevFormInput) => ({
-      ...prevFormInput,
-      imageFile: file,
-      image,
-    }));
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+    reader.onload = () => {
+      setFormInput((prevState) => ({
+        ...prevState,
+        image: reader.result,
+      }));
+    };
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (obj && obj.firebaseKey) {
       updateUser(formInput).then(() => router.push(`/photographers`));
     } else {
       const payload = { ...formInput, uid: user.uid };
@@ -65,7 +66,7 @@ function PhotographerForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Photographer</h2>
+      <h2 className="text mt-5">{obj && obj.firebaseKey ? 'Update' : 'Create'} Photographer</h2>
 
       {/* NAME INPUT */}
       <FloatingLabel controlId="floatingInput1" label="Name" className="mb-3">
@@ -81,7 +82,7 @@ function PhotographerForm({ obj }) {
 
       {/* IMAGE INPUT */}
       <FloatingLabel controlId="floatingInput2" label="Image" className="mb-3">
-        <Form.Control type="file" placeholder="Uplaod your image" name="image" accept="image/*" onChange={handleFileChange} required />
+        <Form.Control type="file" placeholder="Uplaod your image" name="image" accept="image/*" onChange={handleImageChange} required />
         {formInput.image && <img src={formInput.image} alt="Preview" style={{ width: '200px' }} />}
       </FloatingLabel>
 
@@ -111,7 +112,7 @@ function PhotographerForm({ obj }) {
       </FloatingLabel>
 
       {/* SUBMIT BUTTON */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Photographer</Button>
+      <Button type="submit">{obj && obj.firebaseKey ? 'Update' : 'Create'} Photographer</Button>
     </Form>
   );
 }
@@ -120,7 +121,6 @@ PhotographerForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
-    imageFile: PropTypes.object,
     firebaseKey: PropTypes.string,
     zipcode: PropTypes.string,
     phone: PropTypes.string,
