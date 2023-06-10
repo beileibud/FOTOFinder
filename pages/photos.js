@@ -1,18 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getPhotos } from '../api/photoData';
 import PhotoCard from '../components/PhotoCard';
 
 function Photos() {
   const [photos, setPhotos] = useState([]);
+  const router = useRouter();
+  const { query } = router;
 
   const getAllThePhotos = () => {
-    getPhotos().then(setPhotos);
+    getPhotos().then((data) => {
+      const filterPhotos = query.type ? data.filter((photo) => photo.type === query.type) : data;
+      setPhotos(filterPhotos);
+    });
   };
 
   useEffect(() => {
     getAllThePhotos();
-  }, []);
+  }, [query.type]);
 
   return (
     <div>

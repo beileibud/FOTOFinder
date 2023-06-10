@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import SideNavBar from '../components/SideNavBar';
-import { useAuth } from '../utils/context/authContext';
 import AppointmentCard from '../components/AppointmentCard';
 import { getAppointments } from '../api/appointmentData';
 
 const AppointmentsPage = () => {
-  const { user } = useAuth();
   const [appointments, setAppointment] = useState([]);
   const [count, setCount] = useState(0);
 
@@ -33,19 +31,6 @@ const AppointmentsPage = () => {
     <Container fluid>
       <Row style={{ marginTop: '50px' }}>
         <Col sm={3}>
-          <div style={{ display: 'flex' }}>
-            <img
-              src={user.photoURL}
-              alt={user.displayName}
-              style={{
-                height: '30px',
-                width: '30px',
-                borderRadius: '50%',
-                marginRight: '10px',
-              }}
-            />
-            <p>{user.displayName}</p>
-          </div>
           <SideNavBar />
         </Col>
         <Col sm={9}>

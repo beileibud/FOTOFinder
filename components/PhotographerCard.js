@@ -4,15 +4,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { useAuth } from '../utils/context/authContext';
 import { deleteSingleUser } from '../api/userData';
 
 function PhotographerCard({ obj, onUpdate }) {
-  const { user } = useAuth();
-
-  console.warn(obj);
-  // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
-  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
   const deleteThisPhotographer = () => {
     if (window.confirm(`Delete ${obj.name}?`)) {
       deleteSingleUser(obj.firebaseKey).then(() => onUpdate());
@@ -25,15 +19,11 @@ function PhotographerCard({ obj, onUpdate }) {
       <Card.Body>
         <p className="card-text">{obj.name}</p> {/* Render 'Favorite' text if favorite is true */}
         <div>
-          {obj.uid === user.uid ? (
-            <Link href={`/photographer/edit/${obj.firebaseKey}`} passHref>
-              <Button variant="outline-warning" style={{ height: '100%' }}>
-                EDIT
-              </Button>
-            </Link>
-          ) : (
-            ''
-          )}
+          <Link href={`/photographer/edit/${obj.firebaseKey}`} passHref>
+            <Button variant="outline-warning" style={{ height: '100%' }}>
+              EDIT
+            </Button>
+          </Link>
         </div>
         <Button variant="white" onClick={deleteThisPhotographer} className="m-2">
           DELETE
