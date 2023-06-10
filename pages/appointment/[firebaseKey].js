@@ -19,6 +19,7 @@ export default function ViewAppointment() {
     <div className="single-question">
       <h1>{appDetails.client_name}</h1>
       <h3>{appDetails.type}</h3>
+      <h3>{appDetails.client_phone}</h3>
       <h3>{appDetails.client_address}</h3>
     </div>
   );

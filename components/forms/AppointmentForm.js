@@ -16,7 +16,7 @@ const initialState = {
   client_address: '',
   client_phone: '',
   client_email: '',
-  type: '',
+  type: 'wedding',
   photographer: '',
   photographer_uid: '',
   client_id: '',
@@ -24,11 +24,15 @@ const initialState = {
 
 function AppointmentForm({ appObj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [selectedType, setSelectedType] = useState('');
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    if (appObj.firebaseKey) setFormInput(appObj);
+    if (appObj.firebaseKey) {
+      setFormInput(appObj);
+      setSelectedType(appObj.type || '');
+    }
   }, [appObj, user]);
 
   const handleChange = (e) => {
@@ -54,13 +58,15 @@ function AppointmentForm({ appObj }) {
     }
   };
 
+  const typeOptions = ['wedding', 'lifestyle', 'graduation', 'business', 'all'];
+  
   return (
     <div className="appointment-form">
       <Form onSubmit={handleSubmit}>
         <h2 className="mt-5">{appObj.firebaseKey ? 'Update' : 'Create'} Appointment</h2>
 
         <FloatingLabel controlId="floatingInput2" label="Name" className="mb-3">
-          <Form.Control type="text" placeholder="Enter an image url" name="client_name" value={formInput.client_name} onChange={handleChange} required />
+          <Form.Control type="text" placeholder="Enter your name" name="client_name" value={formInput.client_name} onChange={handleChange} required />
         </FloatingLabel>
 
         {/* TITLE INPUT  */}
@@ -69,8 +75,8 @@ function AppointmentForm({ appObj }) {
         </FloatingLabel>
 
         {/* BUSINESS_TITLE INPUT  */}
-        <FloatingLabel controlId="floatingInput3" label="Please enter what type of company this is" className="mb-3">
-          <Form.Control type="text" placeholder="phone number" name="client_phone" value={formInput.client_phone} onChange={handleChange} required />
+        <FloatingLabel controlId="floatingInput1" label="Please enter your phone number" className="mb-3">
+          <Form.Control type="phone" placeholder="phone number" name="client_phone" value={formInput.client_phone} onChange={handleChange} required />
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput3" label="email" className="mb-3">
@@ -81,9 +87,20 @@ function AppointmentForm({ appObj }) {
           <Form.Control type="text" placeholder="photographer" name="photographer" value={formInput.photographer} onChange={handleChange} required />
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingInput3" label="photo type" className="mb-3">
-          <Form.Control type="text" placeholder="type" name="type" value={formInput.type} onChange={handleChange} required />
-        </FloatingLabel>
+        <Form.Select
+          aria-label="Type"
+          name="type"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          required
+        >
+          <option value="">Select a type</option>
+          {typeOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </Form.Select>
 
         {/* SUBMIT BUTTON  */}
         <Button className="app-button" type="submit" variant="light">{appObj.firebaseKey ? 'Update' : 'Create'} Appointment</Button>
@@ -100,7 +117,7 @@ AppointmentForm.propTypes = {
     client_address: PropTypes.string,
     client_phone: PropTypes.string,
     client_email: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.oneOf(['wedding', 'lifestyle', 'graduation', 'business']),
     photographer: PropTypes.string,
     photographer_uid: PropTypes.string,
     client_id: PropTypes.string,

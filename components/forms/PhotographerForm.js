@@ -11,6 +11,7 @@ import { createUser, updateUser } from '../../api/userData';
 const initialState = {
   firebaseKey: '',
   image: '',
+  imageFile: null,
   name: '',
   zipcode: '',
   phone: '',
@@ -34,6 +35,16 @@ function PhotographerForm({ obj }) {
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const image = URL.createObjectURL(file);
+    setFormInput((prevFormInput) => ({
+      ...prevFormInput,
+      imageFile: file,
+      image,
     }));
   };
 
@@ -69,15 +80,9 @@ function PhotographerForm({ obj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT */}
-      <FloatingLabel controlId="floatingInput2" label="Image Url" className="mb-3">
-        <Form.Control
-          type="url"
-          placeholder="Enter an image url"
-          name="image"
-          value={formInput.image}
-          onChange={handleChange}
-          required
-        />
+      <FloatingLabel controlId="floatingInput2" label="Image" className="mb-3">
+        <Form.Control type="file" placeholder="Uplaod your image" name="image" accept="image/*" onChange={handleFileChange} required />
+        {formInput.image && <img src={formInput.image} alt="Preview" style={{ width: '200px' }} />}
       </FloatingLabel>
 
       {/* ZIP CODE INPUT */}
@@ -114,6 +119,8 @@ function PhotographerForm({ obj }) {
 PhotographerForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
+    image: PropTypes.string,
+    imageFile: PropTypes.object,
     firebaseKey: PropTypes.string,
     zipcode: PropTypes.string,
     phone: PropTypes.string,

@@ -4,7 +4,7 @@ import SideNavBar from '../../components/SideNavBar';
 
 export default function AddPhoto() {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', marginTop: '50px' }}>
       <div className="sideNavBar">
         <SideNavBar />
       </div>

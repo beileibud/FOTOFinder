@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -9,8 +8,7 @@ import { deleteSingleAppointments } from '../api/appointmentData';
 
 function AppointmentCard({ appObj, onUpdate }) {
   const { user } = useAuth();
-  // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
-  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
+
   const deleteAppointments = () => {
     if (window.confirm(`Delete ${appObj.client_name}?`)) {
       deleteSingleAppointments(appObj.firebaseKey).then(() => onUpdate());
@@ -20,10 +18,9 @@ function AppointmentCard({ appObj, onUpdate }) {
   return (
     <Card style={{ width: '100%', color: 'black' }}>
       <Card.Body>
-        <Card.Text>
-          <p className="card-text bold">{appObj.client_name}</p>
-        </Card.Text>
+        <Card.Text className="card-text bold">{appObj.client_name}</Card.Text>
         <Card.Text>{appObj.client_address}</Card.Text>
+        <Card.Text>{appObj.client_phone}</Card.Text>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href={`/appointment/${appObj.firebaseKey}`} passHref>
             <Button variant="primary" className="m-2">VIEW</Button>
@@ -46,9 +43,9 @@ function AppointmentCard({ appObj, onUpdate }) {
               ''
             )}
           </div>
-          <footer>123</footer>
         </div>
       </Card.Body>
+      <footer>123</footer>
     </Card>
   );
 }
