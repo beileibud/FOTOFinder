@@ -11,5 +11,14 @@ export default function EditAuthor() {
   useEffect(() => {
     getSingleAppointment(firebaseKey).then(setEditItem);
   }, []);
-  return (<AppointmentForm appObj={editItem} />);
+  return (
+    <div className="new-app-form">
+      <div className="new-app-form fixed-at-side--l">
+        <img className="new-app-img" alt="img" src="/dream2.png" />
+      </div>
+      <div className="app-form-right">
+        <AppointmentForm appObj={editItem} />
+      </div>
+    </div>
+  );
 }

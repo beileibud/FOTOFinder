@@ -1,12 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button, Container, Nav } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useRouter } from 'next/router';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 export default function SideNavBar() {
   const { user } = useAuth();
+  const [selectedType, setSelectedType] = useState('');
+  const router = useRouter();
+  const { firebaseKey } = router.query;
+
+  const handleTypeSelection = (type) => {
+    setSelectedType(type);
+    router.push({
+      pathname: '/photographerPhoto',
+      query: { type },
+    });
+  };
 
   return (
     <div className="sidebar">
@@ -24,20 +38,33 @@ export default function SideNavBar() {
         <p>{user.displayName}</p>
       </div>
       <Container className="sidebar-container">
-        <Nav className="flex-column">
+        <Nav
+          className="flex-column"
+          style={{
+            fontFamily: 'Mont-ExtraLightDEMO',
+            fontSize: '17px',
+            width: '10rem',
+            color: 'gray',
+          }}
+        >
           {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
           <Link className="ps-relative" passHref href="/appointments">
-            <Nav.Link className="nav-topic">View Appointment</Nav.Link>
+            <Nav.Link className="nav-topic" style={{ color: 'gray' }}>
+              View Appointment
+            </Nav.Link>
           </Link>
-          <Link className="ps-relative" passHref href="/photographer/new">
-            <Nav.Link className="nav-topic">About me</Nav.Link>
+          <Link className="ps-relative" passHref href={`/photographer/${firebaseKey}`}>
+            <Nav.Link className="nav-topic" style={{ color: 'gray' }}>
+              Add photo
+            </Nav.Link>
           </Link>
-          <Link className="ps-relative" passHref href="/">
-            <Nav.Link className="nav-topic">Schedules</Nav.Link>
-          </Link>
-          <Link className="ps-relative" passHref href="/photo/new">
-            <Nav.Link className="nav-topic">Portfolio</Nav.Link>
-          </Link>
+          <DropdownButton id="dropdown-basic-button" title={selectedType || 'Photo Galley'} variant="white">
+            <Dropdown.Item onClick={() => handleTypeSelection('')}>All</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleTypeSelection('lifestyle')}>lifestyle</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleTypeSelection('business')}>business</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleTypeSelection('graduation')}>graduation</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleTypeSelection('wedding')}>wedding</Dropdown.Item>
+          </DropdownButton>
           <Button type="button" className="btn btn-sm btn-light" onClick={signOut}>
             Sign Out
           </Button>

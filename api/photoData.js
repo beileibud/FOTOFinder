@@ -67,8 +67,21 @@ const deleteSinglePhoto = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getPhotographersPhotos = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/photos.json?orderBy="photographer_id"&equalTo="${firebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getPhotos,
+  getPhotographersPhotos,
   updatePhotos,
   createPhotos,
   deleteSinglePhoto,

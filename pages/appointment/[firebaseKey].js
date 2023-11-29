@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getSingleAppointment } from '../../api/appointmentData';
+import { Container } from 'react-bootstrap';
+import { viewAppointmentDetails } from '../../api/mergeData';
 
 export default function ViewAppointment() {
   const router = useRouter();
@@ -12,15 +12,20 @@ export default function ViewAppointment() {
 
   // TODO: make call to API layer to get the data
   useEffect(() => {
-    getSingleAppointment(firebaseKey).then(setAppDetails);
+    viewAppointmentDetails(firebaseKey).then(setAppDetails);
   }, [firebaseKey]);
 
   return (
-    <div className="single-question">
-      <h1>{appDetails.client_name}</h1>
-      <h3>{appDetails.type}</h3>
-      <h3>{appDetails.client_phone}</h3>
-      <h3>{appDetails.client_address}</h3>
-    </div>
+    <Container className="view-appointment" style={{ marginBottom: '100px' }}>
+      <h1 className="appointment-title">Appointment Details</h1>
+      <div className="appointment-info">
+        <h3 className="info-item">Date: {appDetails.date}</h3>
+        <h3 className="info-item">Client: {appDetails.client_name}</h3>
+        <h3 className="info-item">Photographer: {appDetails.photographerObject?.name}</h3>
+        <h3 className="info-item">Type: {appDetails.type}</h3>
+        <h3 className="info-item">Client Phone: {appDetails.client_phone}</h3>
+        <h3 className="info-item">Client Adress: {appDetails.client_address}</h3>
+      </div>
+    </Container>
   );
 }

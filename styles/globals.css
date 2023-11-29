@@ -1,16 +1,39 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
+@font-face {
+  font-family: 'Mitchaella Modern Free';
+  src: url('/fonts/Mitchaella Modern Free.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Calliga-Regular';
+  src: url('/fonts/Calliga-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Mont-ExtraLightDEMO';
+  src: url('/fonts/Mont-ExtraLightDEMO.otf') format('truetype');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Mitchaella Modern Free', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 25px; /* Adjust the font size as needed */
+  line-height: 1.5; /* Adjust the line height as needed */
+  color: rgb(166, 156, 143);
 }
 
 a {
-  color: rgb(166, 156, 143);
+  color: rgb(114, 105, 94);
   text-decoration: none;
+}
+
+p {
+  color: rgb(114, 105, 94);
+  margin-bottom: 10px; /* Add margin bottom to create spacing between paragraphs */
 }
 
 * {
@@ -18,7 +41,46 @@ a {
 }
 
 body {
-  background-color: #fffbf7;
+  background-color: #f8f4f0;
+}
+
+/* NAV BAR */
+.navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-text {
+  font-family: 'Mont-ExtraLightDEMO';
+  font-size: 16px;
+  font-style: bold;
+  margin-bottom: -0.2rem;
+}
+
+.logo-name {
+  font-family: 'Calliga-Regular';
+  font-size: 40px;
+  margin-top: -0.5rem;
+  color: rgb(166, 156, 143);
+}
+#dropdown-basic-button {
+  font-size: 18px;
+  color: rgb(166, 156, 143);
+}
+.dropdown-basic {
+  font-size: 18px;
+  color: rgb(166, 156, 143);
+}
+/* TOP SILDE*/
+.carousel {
+  max-width: 100%;
+}
+
+.carousel .carousel-item img {
+  max-width: max-content;
+  height: auto;
 }
 
 /*button*/
@@ -27,12 +89,100 @@ body {
 }
 
 .app-button {
-  background-color:  rgb(234, 226, 216);
-  color:rgb(131, 123, 113);
-  outline-color: wheat;
+  background-color: rgb(234, 226, 216);
+  color: rgb(131, 123, 113);
 }
 
-/*profile side nav */
+.app-top-button {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: transparent;
+  color: rgb(114, 105, 94);
+  font-family: 'Calliga-Regular';
+  max-width:fit-content;
+  font-size: 80px;
+  outline-color: rgb(234, 226, 216);
+  position: relative;
+  margin-left: -2rem;
+  margin-bottom: 2rem;
+}
+.home-go-btn {
+  display: flex;
+  background-color: rgb(114, 105, 94, 0.2);
+  color: rgb(114, 105, 94);
+  font-family: 'Calliga-Regular';
+  max-width:fit-content;
+  font-size: 20px;
+  border: rgb(86, 77, 66);
+  position: relative;
+  margin-left: -2rem;
+  margin-bottom: 2rem;
+}
+
+.home-go-btn:hover {
+  opacity: 0.5;
+}
+
+.app-top-button:hover {
+  opacity: 0.5;
+}
+
+.randen-text {
+  margin-top: 30px;
+  display: flex;
+  position: relative;
+  top: -10px; 
+}
+
+/*HOME PAGE */
+.image-stack {
+  display: grid;
+  position: relative; 
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.image-stack__item--bottom {
+  grid-column: 4 / -1;
+  grid-row: 1;
+}
+
+.image-stack__item--top {
+  grid-row: 1;
+  grid-column: 1 / span 8;
+  padding-top: 30%;
+  z-index: 1;
+}
+
+.home-go-text {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  z-index: 2;
+}
+.home-go-text__text {
+  background-color: rgb(225, 218, 205, 0.4);
+}
+img {
+  width: 70%;
+  display: block;
+  float: right;
+}
+
+.home-out-btn {
+  font-family: 'Mitchaella Modern Free';
+  color: rgb(103, 94, 82);
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  margin: 3px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/*profile side nav+ SLIDER */
 
 .sideNavBar{
   flex-grow: 1;
@@ -40,4 +190,243 @@ body {
 
 .profile-main{
   flex-grow: 3;
+}
+
+.slider-item {
+  margin-right: 5px;
+}
+
+.custom-slider-arrow {
+  color: rgb(166, 156, 143) !important; /* Change the color to your desired color */
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(166, 156, 143)!important;
+  opacity: 1 !important;
+}
+
+/* PHOTO CARD STYLE */
+.photo-card {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.photo-card-image {
+  overflow: hidden;
+}
+
+.photo-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* PHOTOGRAPHER CARD STYLE */
+.photographer-card {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.photographer-card-image {
+  overflow: hidden;
+  align-items: center;
+}
+
+.photographer-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  align-items: center;
+}
+
+.my-component-slider {
+  max-width: max-content;
+  margin: auto;
+}
+
+.z-item {
+  margin: 0 10px;
+}
+
+.slider-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-card-grapher {
+  background-color: transparent;
+  text-align: center;
+  font-size: 40px;
+  border: none;
+  color: rgb(166, 156, 143);
+  width: 100%; /* Adjust the width as needed */
+}
+
+.btn-card-grapher__gone {
+  font-family: 'Mitchaella Modern Free';
+  color: rgb(103, 94, 82);
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  margin: 3px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+}
+/* PHOTOGRAPHER card CHECKBOX */
+.photographer-card-type {
+  display: inline;
+}
+
+.text-form-check {
+  color: rgb(124, 92, 10);
+}
+
+/* APPOINTFORM NEW*/
+
+.new-app-form {
+  display: flex;
+}
+
+.new-app-form .fixed-at-side--l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.new-app-img {
+  position: absolute;
+  left: -1rem;
+  top:auto;
+  max-width: 42%;
+  height: max-content;
+}
+
+.app-form-right {
+  flex-grow: 20;
+}
+
+.date-pike {
+  background-color: transparent;
+  font-size: 18px;
+}
+
+/* FOOTER*/
+.footer-text {
+  font-family: 'Mont-ExtraLightDEMO';
+  font-size: 18px;
+}
+.logo-line {
+  width: 70%;
+  height: 1px;
+  background-color: #ccc;
+  margin-bottom: 50px;
+  margin-top: auto;
+}
+
+/* Search bar on photographer page*/
+.search-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin-right: 1rem;
+}
+
+.search-bar {
+  display: flex;
+  font-size: 6px;
+  align-items: center;
+  background-color:  rgb(166, 156, 143, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-input {
+  font-family: 'Mont-ExtraLightDEMO';
+  font-size: 15px;
+  background-color: transparent;
+  border: none;
+  padding: 0.rem;
+  font-size: 1rem;
+  transition: width 0.3s;
+  width: 200px;
+}
+
+.search-input:focus {
+  width: 300px;
+  border: none;
+}
+
+.search-btn {
+  padding: 0.1rem 1rem;
+  background-color:  rgb(166, 156, 143, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #d8cdb3;
+  border: none;
+}
+
+.black-button-svg {
+  align-items: flex-end;
+  justify-content: flex-end;
+  size: 10px;
+  fill: rgb(67, 63, 63, 0.6); /* Specify the desired color here */
+}
+.black-button-svg:hover{
+  size: 12px;
+  fill: rgba(142, 133, 133, 0.2); /* Specify the desired color here */
+}
+
+/*VIEW APPOINT DETAILS ON FBSK*/
+
+.container.view-appointment {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1.appointment-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  font-family: 'Mont-ExtraLightDEMO';
+}
+
+div.appointment-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+h3.info-item {
+  font-size: 26px;
+  font-weight: normal;
+  margin: 0;
+  padding: 5px;
+  background-color: #f8f4f0;
+  border-radius: 4px;
+}
+
+h3.info-item:nth-child(odd) {
+  background-color: #ece7e3;
 }

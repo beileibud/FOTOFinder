@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getSingleUser } from '../../../api/userData';
 import PhotographerForm from '../../../components/forms/PhotographerForm';
+import { getSinglePhotographer } from '../../../api/photographerData';
 
 export default function EditPhotographer() {
   const [editItem, setEditItem] = useState({});
@@ -9,7 +9,7 @@ export default function EditPhotographer() {
   const { firebaseKey } = router.query;
 
   useEffect(() => {
-    getSingleUser(firebaseKey).then(setEditItem);
+    getSinglePhotographer(firebaseKey).then(setEditItem);
   }, []);
   return (<PhotographerForm obj={editItem} />);
 }
