@@ -42,3 +42,10 @@ yarn-error.log*
 .firebase/
 
 .tool-versions
+
+NEXT_PUBLIC_FIREBASE_API_KEY="AIzaSyC62L0BsAX9yX_UCDokd6kHDEuvBUEOR3M"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="fotofinderbeilei.firebaseapp.com"
+NEXT_PUBLIC_FIREBASE_DATABASE_URL="https://fotofinderbeilei-default-rtdb.firebaseio.com"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="fotofinderbeilei"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="fotofinderbeilei.appspot.com"
+NEXT_PUBLIC_FIREBASE_APP_ID="1:566660615053:web:fe2840ff6b1429afebcbc4"
