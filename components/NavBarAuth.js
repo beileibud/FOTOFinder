@@ -1,17 +1,21 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import PropTypes from 'prop-types';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
+import { getUserByUID } from '../api/photographerData';
 
 export default function NavBarAuth() {
   const { user } = useAuth();
+  const [photographerUser, setPhotographerUser] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    getUserByUID(user.uid).then(setPhotographerUser);
+  }, []);
 
   const handleTypeSelection = (type) => {
     setSelectedType(type);
@@ -21,61 +25,61 @@ export default function NavBarAuth() {
     });
   };
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
-      <Container>
+      <Container className="nav-container" style={{ display: 'flex', flexDirection: 'column' }}>
         <Link passHref href="/">
-          <Navbar.Brand>FOTOfinder</Navbar.Brand>
+          <Navbar.Brand className="logo-name">FOTOfinder</Navbar.Brand>
         </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav className="justify-content-end">
-            <Link passHref href="/">
-              <Nav.Link>Home</Nav.Link>
-            </Link>
-            <Link passHref href="/photographers">
-              <Nav.Link>photographers</Nav.Link>
-            </Link>
-            <Link passHref href="/appointment/new">
-              <Nav.Link>book appointment</Nav.Link>
-            </Link>
-            <Link passHref href={{ pathname: '/photos', query: { type: selectedType } }}>
-              <Nav.Link>
-                <DropdownButton id="dropdown-basic-button" title={selectedType || 'Type'} variant="white">
-                  <Dropdown.Item onClick={() => handleTypeSelection('')}>All Types</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleTypeSelection('lifestyle')}>lifestyle</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleTypeSelection('business')}>business</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleTypeSelection('graduation')}>graduation</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleTypeSelection('wedding')}>wedding</Dropdown.Item>
-                </DropdownButton>
-              </Nav.Link>
-            </Link>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Link passHref href="/profile">
-                <a>
-                  <img
-                    src={user.photoURL}
-                    alt={user.displayName}
-                    style={{
-                      height: '30px',
-                      width: '30px',
-                      borderRadius: '50%',
-                      marginRight: '10px',
-                    }}
-                  />
-                </a>
+        <div className="nav-rest-buttons">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse className="nav-text">
+            <Nav className="nav-text">
+              <Link passHref href="/">
+                <Nav.Link>HOME</Nav.Link>
               </Link>
-            </div>
-          </Nav>
-        </Navbar.Collapse>
+              <Link passHref href="/photographers">
+                <Nav.Link>PHOTOGRAPHERS</Nav.Link>
+              </Link>
+              <Link passHref href="/appointment/new">
+                <Nav.Link>BOOK APPOINTMENT</Nav.Link>
+              </Link>
+              <DropdownButton id="dropdown-basic-button" title={selectedType || 'PHOTOS'} variant="white" style={{ alignItem: 'center' }}>
+                <Dropdown.Item className="dropdown-basic" onClick={() => handleTypeSelection('')}>
+                  All
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdown-basic" onClick={() => handleTypeSelection('lifestyle')}>
+                  lifestyle
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdown-basic" onClick={() => handleTypeSelection('business')}>
+                  business
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdown-basic" onClick={() => handleTypeSelection('graduation')}>
+                  graduation
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdown-basic" onClick={() => handleTypeSelection('wedding')}>
+                  wedding
+                </Dropdown.Item>
+              </DropdownButton>
+              <div className="nav-rest-buttons">
+                {photographerUser && photographerUser.checkUser ? (
+                  <Link passHref href="/photographerProfile">
+                    <Nav.Link className="nav-text">PROFILE PAGE</Nav.Link>
+                  </Link>
+                ) : (
+                  <Link passHref href="/clientUser">
+                    <Nav.Link>PROFILE PAGE</Nav.Link>
+                  </Link>
+                )}
+              </div>
+            </Nav>
+          </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   );
 }
-
-NavBarAuth.propTypes = {
-  user: PropTypes.shape({
-    displayName: PropTypes.string,
-    photoURL: PropTypes.string,
-  }).isRequired,
-};

@@ -28,6 +28,18 @@ const getSingleAppointment = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getClientsAppointment = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/appointment.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 const createAppointments = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/appointment.json`, {
     method: 'POST',
@@ -49,9 +61,17 @@ const updateAppointments = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then(resolve)
-    .catch(reject);
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to update appointment.'); // Add an error message here
+      }
+      return response.json();
+    })
+    .then((data) => resolve(Object.values(data)))
+    .catch((error) => {
+      console.error('Error updating appointment:', error); // Log the error for debugging
+      reject(error);
+    });
 });
 
 // FIXME: DELETE AUTHOR
@@ -67,8 +87,22 @@ const deleteSingleAppointments = (firebaseKey) => new Promise((resolve, reject) 
     .catch(reject);
 });
 
+const getPhotographersAppointments = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/appointment.json?orderBy="photographer_id"&equalTo="${firebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getAppointments,
+  getClientsAppointment,
+  getPhotographersAppointments,
   updateAppointments,
   createAppointments,
   deleteSingleAppointments,

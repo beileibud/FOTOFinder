@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 
 export default function User() {
   const { user } = useAuth();
+
   console.warn(user);
   return (
     <Card style={{
@@ -12,6 +13,7 @@ export default function User() {
       width: '15rem',
       display: 'flex',
       alignItems: 'center',
+      backgroundColor: 'transparent',
     }}
     >
       <div style={{
@@ -32,14 +34,3 @@ export default function User() {
     </Card>
   );
 }
-
-User.propTypes = {
-  user: PropTypes.shape({
-    photoURL: PropTypes.string,
-    displayName: PropTypes.string,
-    email: PropTypes.string,
-    metadata: PropTypes.shape({
-      lastSignInTime: PropTypes.string,
-    }),
-  }).isRequired,
-};
