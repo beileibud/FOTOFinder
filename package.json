@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "pre-commit": "next lint",
-    "deploy": "npm run build && firebase deploy"
+    "pre-commit": "next lint"
   },
   "lint-staged": {
     "*.{js,jsx}": [
