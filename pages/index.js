@@ -2,8 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
-import MultiItemCarousel from '../components/Slide';
-// import MultiItemCarousel from '../components/slide';
+import MultiItemCarousel from '../components/slide';
 import TopSlide from '../components/topSlide';
 
 function Home() {
