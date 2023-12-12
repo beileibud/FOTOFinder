@@ -21,7 +21,7 @@ function Home() {
       <br />
       <div className="image-stack">
         <div className="home-go-text">
-          <h1 className="home-go-text__text">Take a look of all the photographers.</h1>
+          <h1 className="home-go-text__text">Take a look of all the photographers!</h1>
           <Link passHref href="/photographers">
             <Button className="home-go-btn" variant="light" style={{ marginLeft: '0.8rem' }}>LET S GO</Button>
           </Link>
