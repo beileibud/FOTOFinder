@@ -1,5 +1,5 @@
 # FOTOFinder -React/Next.js App
-![Link to the FOTOFinder][https://potofinder.netlify.app/]
+Here is the link to the APP: [https://potofinder.netlify.app/]
 
 
 
