@@ -1,7 +1,11 @@
 # FOTOFinder -React/Next.js App
-![Alt text for the image][https://potofinder.netlify.app/]
+![Link to the FOTOFinder][https://potofinder.netlify.app/]
 
 
-[def]: /public/main.png
 
 ![Alt text for the image](/public/main.png)
+
+Make an appointment to your favorite photographer
+![Alt text for the image](/public/appointment.png)
+
+Have a great expirence of finding a local photographer!
