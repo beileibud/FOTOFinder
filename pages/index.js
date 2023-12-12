@@ -14,7 +14,7 @@ function Home() {
       <br style={{ marginTop: '50px' }} />
       <MultiItemCarousel />
       <h1 style={{ marginTop: '100px', fontFamily: 'Calliga-Regular', fontSize: '60px' }}>Create your photography website</h1>
-      <h5>Create a professional photography website for your portfolio. Start your free journey today.  No credit card required. Create better websites with mobile-responsive templates, seamless drag & drop and unlimited customization.</h5>
+      <h5>Create a professional photography website for your portfolio. Start your free journey today.  No credit card required. Create better websites with mobile-responsive templates, seamless drag & drop and unlimited customization!</h5>
       <br />
       <br />
       <br />

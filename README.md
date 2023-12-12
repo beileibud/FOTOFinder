@@ -5,5 +5,7 @@
 
 ![Alt text for the image](/public/main.png)
 
-![Alt text for the image](/appointment.png)
+Make an appointment to your favorite photographer
+![Alt text for the image](/public/appointment.png)
 
+Have a great expirence of finding a local photographer!
