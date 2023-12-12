@@ -56,7 +56,7 @@ const AppointmentsPage = () => {
       <Row style={{ marginTop: '50px' }}>
         <Col sm={3}>{photographerUser && photographerUser.checkUser ? <SideNavBar /> : <SideNavBarUser />}</Col>
         <Col sm={9}>
-          <h5 style={{ marginTop: '30px' }}>{count} APPOINTMENT</h5>
+          <h5 style={{ marginTop: '30px' }}>{count} APPOINTMENTS</h5>
           <div className="d-flex flex-wrap" style={{ width: '100%', color: 'black', marginBottom: '50px' }}>
             {Array.isArray(appointments) && appointments.map((appointment) => <AppointmentCard key={appointment.firebaseKey} appObj={appointment} onUpdate={getAllAppointments} photographer_id={appointment.photographer_id} />)}
           </div>
