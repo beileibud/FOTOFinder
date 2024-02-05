@@ -23,7 +23,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 25px; /* Adjust the font size as needed */
   line-height: 1.5; /* Adjust the line height as needed */
-  color: rgb(166, 156, 143);
+  color: rgb(114, 105, 94);
 }
 
 a {
@@ -32,8 +32,8 @@ a {
 }
 
 p {
-  color: rgb(114, 105, 94);
-  margin-bottom: 10px; /* Add margin bottom to create spacing between paragraphs */
+  color: #726355;
+  margin-bottom: 10px;
 }
 
 * {
@@ -63,7 +63,7 @@ body {
   font-family: 'Calliga-Regular';
   font-size: 40px;
   margin-top: -0.5rem;
-  color: rgb(166, 156, 143);
+  color: rgb(114, 105, 94);
 }
 #dropdown-basic-button {
   font-size: 18px;
