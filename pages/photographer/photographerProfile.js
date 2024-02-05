@@ -13,10 +13,10 @@ const PProfilePage = () => {
 
   const viewSinglePhotographer = () => {
     getSinglePhotographer(firebaseKey)
-      .then(() => {
-        console.log('Fetched photographer:', photographer);
-        if (photographer !== null) {
-          setSingleP(photographer);
+      .then((photographerData) => {
+        console.log('Fetched photographer:', photographerData);
+        if (photographerData !== null) {
+          setSingleP(photographerData);
         }
       })
       .catch((error) => {
@@ -35,7 +35,9 @@ const PProfilePage = () => {
       <Container fluid style={{ flex: '1' }}>
         <Row style={{ position: 'relative', marginTop: '50px' }}>
           <Col sm={3} style={{ marginTop: '50px' }}>
-            {photographer && <PhotographerCard obj={photographer} onUpdate={viewSinglePhotographer} />}
+            {Object.keys(photographer).length > 0 && (
+              <PhotographerCard obj={photographer} onUpdate={viewSinglePhotographer} />
+            )}
           </Col>
           <Col sm={9} className="photographer-profile-fbkey" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <br />
