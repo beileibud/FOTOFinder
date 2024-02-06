@@ -18,8 +18,8 @@ function PhotographerPhoto() {
 
   useEffect(() => {
     getSinglePhotographer(firebaseKey) // Fetch the single photographer using the firebaseKey
-      .then(() => {
-        setPhotographer(photographer);
+      .then((photographerData) => {
+        setPhotographer(photographerData);
       })
       .catch((error) => {
         console.log('Error fetching photographer:', error);
@@ -33,36 +33,44 @@ function PhotographerPhoto() {
   const getAllThePhotos = () => {
     getPhotographersPhotos(firebaseKey)
       .then((data) => {
+        // Ensure data is not undefined here
         if (Array.isArray(data)) {
           const filterPhotos = query.type ? data.filter((photo) => photo.type === query.type) : data;
           setPhotographersPhoto(filterPhotos);
         } else {
           setPhotographersPhoto([]);
         }
+      })
+      .catch((error) => {
+        console.error('Error fetching photos:', error);
       });
+
   };
 
   useEffect(() => {
     getAllThePhotos();
   }, [query.type]);
 
+  console.log('getAllThePhotos function:', getAllThePhotos);
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Container fluid style={{ flex: '1' }}>
         <Row style={{ marginTop: '50px' }}>
           <Col sm={3} style={{ paddingRight: '10px' }}>
-            <div className="sideProfileNav">{photographer && <PhotographerCard obj={photographer} />}</div>
+            <div className="sideProfileNav">
+              {photographer && <PhotographerCard obj={photographer} />}
+            </div>
           </Col>
           <Col sm={9}>
             <Row style={{ marginLeft: '-10px', marginRight: '-10px' }}>
-              {Array.isArray(photographersPhoto)
-                && photographersPhoto.map((photo) => (
-                  <Col xs={6} sm={4} md={3} style={{ padding: '10px' }}>
-                    <div style={{ margin: '0 5px' }}>
-                      <PhotoCard key={photo.firebaseKey} photoObj={photo} onUpdate={getAllThePhotos} photographer_id={firebaseKey || ''} />
-                    </div>
-                  </Col>
-                ))}
+              {Array.isArray(photographersPhoto) && photographersPhoto.map((photo) => (
+                <Col key={photo.firebaseKey} xs={6} sm={4} md={3} style={{ padding: '10px' }}>
+                  <div style={{ margin: '0 5px' }}>
+                    <PhotoCard photoObj={photo} onUpdate={getAllThePhotos} photographer_id={firebaseKey || ''} />
+                  </div>
+                </Col>
+              ))}
             </Row>
           </Col>
         </Row>
