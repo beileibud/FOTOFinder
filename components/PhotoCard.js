@@ -43,7 +43,7 @@ function PhotoCard({ photoObj, onUpdate }) {
             {photoObj.uid === user.uid ? (
               <div
                 role="button" // Adding role for accessibility
-                tabIndex={0} // Allowing the div to be focused for keyboard events
+                tabIndex={0}
                 onClick={deleteThisPhoto}
                 onKeyDown={handleKeyDown} // Handling keyboard events
                 className="mt-3 black-button-svg"

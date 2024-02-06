@@ -44,7 +44,6 @@ function PhotographerPhoto() {
       .catch((error) => {
         console.error('Error fetching photos:', error);
       });
-
   };
 
   useEffect(() => {
